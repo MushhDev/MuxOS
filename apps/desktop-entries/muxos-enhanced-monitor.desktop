@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MuxOS Enhanced System Monitor
+Name[es]=Monitor de Sistema Mejorado MuxOS
+Comment=Enhanced system monitoring with hardware detection
+Comment[es]=Monitoreo de sistema mejorado con detección de hardware
+Exec=/usr/bin/muxos-enhanced-monitor
+Icon=utilities-system-monitor
+Terminal=false
+Categories=System;Monitor;HardwareSettings;
+Keywords=system;monitor;performance;hardware;cpu;memory;network;
+Keywords[es]=sistema;monitor;rendimiento;hardware;cpu;memoria;red;
+StartupNotify=true

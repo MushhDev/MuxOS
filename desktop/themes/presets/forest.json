@@ -1,0 +1,22 @@
+{
+  "name": "MuxOS Forest",
+  "colors": {
+    "primary": "#10b981",
+    "secondary": "#14b8a6",
+    "accent": "#22c55e",
+    "success": "#4ade80",
+    "warning": "#fbbf24",
+    "error": "#f87171",
+    "bg_dark": "#052e16",
+    "bg_medium": "#0a3d20",
+    "bg_light": "#134e29",
+    "bg_card": "#166534",
+    "text_primary": "#f0fdf4",
+    "text_secondary": "#bbf7d0",
+    "text_muted": "#86efac",
+    "border": "#15803d",
+    "gradient_start": "#052e16",
+    "gradient_mid": "#166534",
+    "gradient_end": "#10b981"
+  }
+}

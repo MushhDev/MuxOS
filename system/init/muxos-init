@@ -1,0 +1,121 @@
+#!/bin/bash
+# MuxOS Init System - Fast and lightweight
+
+set -e
+
+# Mount essential filesystems
+mount -t proc proc /proc
+mount -t sysfs sys /sys
+mount -t devtmpfs dev /dev
+mount -t tmpfs tmpfs /tmp
+
+# Create necessary directories
+mkdir -p /dev/pts /dev/shm /run /var/run
+
+mount -t devpts devpts /dev/pts
+mount -t tmpfs tmpfs /dev/shm
+mount -t tmpfs tmpfs /run
+
+# Link /var/run to /run
+ln -sf /run /var/run
+
+# Load kernel modules
+echo "Loading kernel modules..."
+for mod in \
+    drm \
+    i915 \
+    amdgpu \
+    nouveau \
+    snd_hda_intel \
+    usbhid \
+    usb-storage \
+    uas \
+    xhci_pci \
+    ehci_pci \
+    ohci_pci \
+    uhci_hcd \
+    sd_mod \
+    sr_mod
+do
+    modprobe "$mod" 2>/dev/null || true
+done
+
+# Setup zram for swap (low RAM optimization)
+if [ -f /sys/module/zram/parameters/num_devices ]; then
+    echo "Setting up ZRAM..."
+    modprobe zram num_devices=1
+    echo lz4 > /sys/block/zram0/comp_algorithm
+    echo 2G > /sys/block/zram0/disksize
+    mkswap /dev/zram0
+    swapon -p 10 /dev/zram0
+fi
+
+# Set swappiness for gaming performance
+echo 10 > /proc/sys/vm/swappiness
+
+# Network setup
+echo "Starting network..."
+ip link set lo up
+
+# Start udev for hardware detection
+echo "Starting udev..."
+/lib/systemd/systemd-udevd --daemon
+udevadm trigger --action=add
+udevadm settle
+
+# Mount root filesystem as read-write
+mount -o remount,rw /
+
+# Set hostname
+if [ -f /etc/hostname ]; then
+    hostname -F /etc/hostname
+fi
+
+# Start system services
+echo "Starting system services..."
+
+# D-Bus
+mkdir -p /run/dbus
+/usr/bin/dbus-daemon --system --fork
+
+/bin/echo "Starting udisks2..."
+if command -v udisksd >/dev/null 2>&1; then
+    udisksd --no-debug &
+elif [ -x /usr/lib/udisks2/udisksd ]; then
+    /usr/lib/udisks2/udisksd --no-debug &
+elif [ -x /usr/libexec/udisks2/udisksd ]; then
+    /usr/libexec/udisks2/udisksd --no-debug &
+fi
+
+/bin/echo "Starting bluetooth..."
+if command -v bluetoothd >/dev/null 2>&1; then
+    bluetoothd &
+elif [ -x /usr/lib/bluetooth/bluetoothd ]; then
+    /usr/lib/bluetooth/bluetoothd &
+elif [ -x /usr/sbin/bluetoothd ]; then
+    /usr/sbin/bluetoothd &
+fi
+
+# Network Manager
+/usr/sbin/NetworkManager --no-daemon &
+
+# PulseAudio
+/usr/bin/pulseaudio --system --daemonize
+
+# Apply CPU governor for gaming
+echo "Applying performance optimizations..."
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
+    [ -f "$cpu" ] && echo performance > "$cpu"
+done
+
+# Disable CPU mitigations for performance (user can enable if needed)
+echo 0 > /proc/sys/kernel/unprivileged_userns_clone 2>/dev/null || true
+
+# Start display manager
+echo "Starting display manager..."
+/usr/sbin/lightdm &
+
+# Keep init running
+while true; do
+    sleep 3600
+done

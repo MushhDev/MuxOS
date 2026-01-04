@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MuxOS Control Panel
+Comment=System settings and configuration
+Exec=/usr/bin/muxos-control-panel
+Icon=preferences-system
+Terminal=false
+Categories=System;Settings;
+Keywords=settings;preferences;configuration;

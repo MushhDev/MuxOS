@@ -1,0 +1,59 @@
+#!/bin/bash
+# MuxOS Velocity - Openbox Autostart
+# Beautiful animations and gradient theme
+
+# Load theme configuration
+THEME_CONFIG="$HOME/.config/muxos/theme.json"
+
+# Set wallpaper with MuxOS gradient
+if [ -f "/usr/share/backgrounds/muxos-velocity-1920x1080.png" ]; then
+    feh --bg-fill /usr/share/backgrounds/muxos-velocity-1920x1080.png &
+elif [ -f "/usr/share/backgrounds/muxos-default.png" ]; then
+    feh --bg-fill /usr/share/backgrounds/muxos-default.png &
+else
+    # Fallback to solid color
+    hsetroot -solid "#1a1a2e" &
+fi
+
+# Start compositor with animations and effects
+picom --config /etc/xdg/picom/picom-velocity.conf &
+
+# Start panel with velocity theme
+tint2 -c /etc/xdg/tint2/tint2rc-velocity &
+
+# Start network manager applet
+sleep 1 && nm-applet &
+
+# Start volume control applet
+volumeicon &
+
+# Start notification daemon with velocity theme
+dunst -config /etc/xdg/dunst/dunstrc &
+
+# Auto-mount removable drives (USB) via udisks2
+udiskie --tray &
+
+# Disable screen blanking for gaming
+xset s off
+xset -dpms
+xset s noblank
+
+# Set keyboard repeat rate (faster for gaming)
+xset r rate 200 40
+
+# Start polkit agent for authentication
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# Apply gaming optimizations
+gamemode -s &
+
+# Start update checker daemon (background)
+/usr/bin/muxos-updater --daemon &
+
+# Show welcome on first run
+FIRST_BOOT_SYSTEM_MARKER="/var/lib/muxos/.firstboot_complete"
+if [ ! -f "$FIRST_BOOT_SYSTEM_MARKER" ]; then
+    mkdir -p "$HOME/.config/muxos"
+    sleep 2
+    /usr/bin/muxos-welcome
+fi

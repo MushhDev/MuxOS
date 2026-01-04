@@ -1,0 +1,54 @@
+# MuxOS Velocity - Terminal Theme
+# Blue/Green/Purple gradient design
+
+[Configuration]
+BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
+BackgroundDarkness=0.88
+FontName=JetBrains Mono 11
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBellUrgent=FALSE
+MiscBordersDefault=FALSE
+MiscCursorBlinks=TRUE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscDefaultGeometry=120x35
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=TRUE
+MiscMouseWheelZoom=TRUE
+MiscToolbarDefault=FALSE
+MiscConfirmClose=TRUE
+MiscCycleTabs=TRUE
+MiscTabCloseButtons=TRUE
+MiscTabCloseMiddleClick=TRUE
+MiscTabPosition=GTK_POS_TOP
+MiscHighlightUrls=TRUE
+MiscMiddleClickOpensUri=TRUE
+MiscCopyOnSelect=FALSE
+MiscShowRelaunchDialog=TRUE
+MiscRewrapOnResize=TRUE
+MiscUseShiftArrowsToScroll=FALSE
+MiscSlimTabs=TRUE
+MiscNewTabAdjacent=FALSE
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=FALSE
+ScrollingOnOutput=FALSE
+ScrollingLines=10000
+TitleMode=TERMINAL_TITLE_REPLACE
+
+# Colors - MuxOS Velocity Palette
+ColorForeground=#f8fafc
+ColorBackground=#0f0f1a
+ColorCursor=#06b6d4
+ColorCursorForeground=#0f0f1a
+ColorCursorUseDefault=FALSE
+ColorSelection=#6366f1
+ColorSelectionBackground=#6366f1
+ColorSelectionUseDefault=FALSE
+ColorBold=#f8fafc
+ColorBoldUseDefault=FALSE
+
+# 16-color palette (Velocity theme)
+ColorPalette=#1a1a2e;#ef4444;#10b981;#f59e0b;#6366f1;#8b5cf6;#06b6d4;#cbd5e1;#64748b;#f87171;#34d399;#fbbf24;#818cf8;#a78bfa;#22d3ee;#f8fafc
+
+TabActivityColor=#06b6d4

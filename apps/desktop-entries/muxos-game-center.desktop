@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Game Center
+Comment=Gaming hub and optimization
+Exec=/usr/bin/muxos-game-center
+Icon=applications-games
+Terminal=false
+Categories=Game;
+Keywords=games;gaming;steam;lutris;

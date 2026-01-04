@@ -1,0 +1,11 @@
+[Unit]
+Description=MuxOS GameMode Optimization Service
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/muxos/optimizations/gaming-tweaks.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

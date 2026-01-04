@@ -1,0 +1,44 @@
+# Build directories
+build/
+*.iso
+*.img
+*.squashfs
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# Chroot environment
+chroot/
+
+# Downloaded packages
+*.deb
+*.tar.gz
+*.tar.xz
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*.bak
+*.backup

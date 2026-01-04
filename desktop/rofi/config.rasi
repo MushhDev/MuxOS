@@ -1,0 +1,83 @@
+/* MuxOS Rofi Configuration */
+
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";
+    font: "Sans 11";
+    display-drun: "Applications";
+    display-run: "Commands";
+    display-window: "Windows";
+    drun-display-format: "{name}";
+    terminal: "xfce4-terminal";
+}
+
+* {
+    bg: #1a1a2e;
+    bg-alt: #16213e;
+    fg: #eaeaea;
+    fg-alt: #888888;
+    accent: #0f3460;
+    urgent: #e94560;
+    
+    background-color: @bg;
+    text-color: @fg;
+    border-color: @accent;
+}
+
+window {
+    width: 600px;
+    border: 2px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @bg-alt;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+prompt {
+    background-color: @accent;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-color: @fg;
+    margin: 0 10px 0 0;
+}
+
+entry {
+    padding: 8px;
+    background-color: transparent;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    fixed-height: true;
+    scrollbar: false;
+}
+
+element {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+element normal.normal {
+    background-color: transparent;
+}
+
+element selected.normal {
+    background-color: @accent;
+}
+
+element-icon {
+    size: 24px;
+    margin: 0 10px 0 0;
+}
+
+element-text {
+    vertical-align: 0.5;
+}

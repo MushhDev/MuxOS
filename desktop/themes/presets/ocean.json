@@ -1,0 +1,22 @@
+{
+  "name": "MuxOS Ocean",
+  "colors": {
+    "primary": "#0ea5e9",
+    "secondary": "#06b6d4",
+    "accent": "#14b8a6",
+    "success": "#10b981",
+    "warning": "#f59e0b",
+    "error": "#ef4444",
+    "bg_dark": "#0c1929",
+    "bg_medium": "#0f2942",
+    "bg_light": "#1a3a5c",
+    "bg_card": "#234b73",
+    "text_primary": "#f0f9ff",
+    "text_secondary": "#bae6fd",
+    "text_muted": "#7dd3fc",
+    "border": "#0369a1",
+    "gradient_start": "#0c4a6e",
+    "gradient_mid": "#0369a1",
+    "gradient_end": "#0ea5e9"
+  }
+}

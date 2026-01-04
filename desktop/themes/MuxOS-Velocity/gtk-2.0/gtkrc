@@ -1,0 +1,182 @@
+# MuxOS Velocity - GTK2 Theme
+# For legacy application compatibility
+
+gtk-color-scheme = "bg_color:#1a1a2e\nfg_color:#f8fafc\nbase_color:#0f0f1a\ntext_color:#f8fafc\nselected_bg_color:#6366f1\nselected_fg_color:#ffffff\ntooltip_bg_color:#2d2d4a\ntooltip_fg_color:#f8fafc"
+
+style "default" {
+    GtkWidget::focus-line-width = 0
+    GtkWidget::focus-padding = 0
+    GtkMenuBar::shadow-type = none
+    GtkToolbar::shadow-type = none
+    GtkMenuBar::internal-padding = 0
+    GtkMenu::horizontal-padding = 0
+    GtkMenu::vertical-padding = 0
+    
+    xthickness = 1
+    ythickness = 1
+    
+    fg[NORMAL] = @fg_color
+    fg[PRELIGHT] = @fg_color
+    fg[ACTIVE] = @fg_color
+    fg[SELECTED] = @selected_fg_color
+    fg[INSENSITIVE] = "#64748b"
+    
+    bg[NORMAL] = @bg_color
+    bg[PRELIGHT] = "#252542"
+    bg[ACTIVE] = "#252542"
+    bg[SELECTED] = @selected_bg_color
+    bg[INSENSITIVE] = @bg_color
+    
+    base[NORMAL] = @base_color
+    base[PRELIGHT] = "#252542"
+    base[ACTIVE] = @selected_bg_color
+    base[SELECTED] = @selected_bg_color
+    base[INSENSITIVE] = @base_color
+    
+    text[NORMAL] = @text_color
+    text[PRELIGHT] = @text_color
+    text[ACTIVE] = @selected_fg_color
+    text[SELECTED] = @selected_fg_color
+    text[INSENSITIVE] = "#64748b"
+    
+    engine "murrine" {
+        animation = TRUE
+        arrowstyle = 1
+        border_shades = {1.0, 0.8}
+        colorize_scrollbar = TRUE
+        contrast = 0.8
+        default_button_color = @selected_bg_color
+        focusstyle = 0
+        glazestyle = 0
+        glow_shade = 1.0
+        glowstyle = 0
+        gradient_shades = {1.1, 1.0, 1.0, 0.9}
+        highlight_shade = 1.0
+        lightborder_shade = 1.0
+        lightborderstyle = 1
+        listviewheaderstyle = 1
+        listviewstyle = 0
+        menubaritemstyle = 1
+        menubarstyle = 0
+        menuitemstyle = 1
+        menustyle = 0
+        progressbarstyle = 1
+        reliefstyle = 2
+        rgba = TRUE
+        roundness = 8
+        scrollbarstyle = 2
+        separatorstyle = 1
+        shadow_shades = {0.5, 0.0}
+        sliderstyle = 0
+        stepperstyle = 1
+        textstyle = 0
+        toolbarstyle = 0
+    }
+}
+
+style "button" = "default" {
+    xthickness = 4
+    ythickness = 4
+    
+    bg[NORMAL] = "#2d2d4a"
+    bg[PRELIGHT] = "#3b3b5c"
+    bg[ACTIVE] = "#252542"
+    bg[SELECTED] = @selected_bg_color
+    
+    engine "murrine" {
+        border_shades = {1.0, 0.8}
+        contrast = 0.9
+        gradient_shades = {1.15, 1.05, 1.0, 0.9}
+        roundness = 8
+        shadow_shades = {1.0, 0.9}
+    }
+}
+
+style "entry" = "default" {
+    xthickness = 4
+    ythickness = 4
+    
+    base[NORMAL] = @base_color
+    base[INSENSITIVE] = @base_color
+    
+    engine "murrine" {
+        border_shades = {1.0, 1.0}
+        contrast = 0.7
+        roundness = 8
+    }
+}
+
+style "menu" = "default" {
+    xthickness = 0
+    ythickness = 0
+    
+    bg[NORMAL] = "#2d2d4a"
+    
+    engine "murrine" {
+        roundness = 0
+    }
+}
+
+style "menuitem" = "default" {
+    xthickness = 2
+    ythickness = 3
+    
+    fg[PRELIGHT] = @selected_fg_color
+    
+    engine "murrine" {
+        roundness = 4
+    }
+}
+
+style "progressbar" = "default" {
+    xthickness = 0
+    ythickness = 0
+    
+    bg[SELECTED] = @selected_bg_color
+    
+    engine "murrine" {
+        gradient_shades = {1.2, 1.0, 1.0, 0.85}
+        roundness = 8
+        trough_shades = {0.9, 1.1}
+    }
+}
+
+style "scrollbar" = "default" {
+    bg[NORMAL] = "#3b3b5c"
+    bg[PRELIGHT] = @selected_bg_color
+    bg[ACTIVE] = @selected_bg_color
+    
+    engine "murrine" {
+        contrast = 0.0
+        roundness = 8
+        trough_shades = {0.9, 0.9}
+    }
+}
+
+style "tooltip" = "default" {
+    xthickness = 8
+    ythickness = 8
+    
+    bg[NORMAL] = @tooltip_bg_color
+    fg[NORMAL] = @tooltip_fg_color
+    
+    engine "murrine" {
+        roundness = 8
+    }
+}
+
+class "GtkWidget" style "default"
+class "GtkButton" style "button"
+class "GtkEntry" style "entry"
+class "GtkMenu" style "menu"
+class "GtkMenuItem" style "menuitem"
+class "GtkProgressBar" style "progressbar"
+class "GtkScrollbar" style "scrollbar"
+widget "gtk-tooltip*" style "tooltip"
+
+gtk-icon-sizes = "panel-menu=24,24:panel=24,24:gtk-button=16,16:gtk-large-toolbar=24,24"
+gtk-button-images = 0
+gtk-menu-images = 1
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+gtk-auto-mnemonics = 1
+gtk-primary-button-warps-slider = 1

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=MuxOS Velocity
+Comment=Modern gaming theme with blue, green, and purple gradients
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=MuxOS-Velocity
+MetacityTheme=MuxOS-Velocity
+IconTheme=Papirus-Dark
+CursorTheme=Breeze_Snow
+ButtonLayout=:minimize,maximize,close

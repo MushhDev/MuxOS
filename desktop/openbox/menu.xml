@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="root-menu" label="MuxOS">
+
+  <item label="🖥️ Terminal">
+    <action name="Execute"><command>xfce4-terminal</command></action>
+  </item>
+  
+  <item label="📁 File Manager">
+    <action name="Execute"><command>pcmanfm</command></action>
+  </item>
+  
+  <item label="🌐 Firefox">
+    <action name="Execute"><command>firefox-esr</command></action>
+  </item>
+
+  <separator/>
+
+  <menu id="gaming-menu" label="🎮 Gaming">
+    <item label="Game Center">
+      <action name="Execute"><command>muxos-game-center</command></action>
+    </item>
+    <item label="Steam">
+      <action name="Execute"><command>steam</command></action>
+    </item>
+    <item label="Lutris">
+      <action name="Execute"><command>lutris</command></action>
+    </item>
+    <item label="Wine Configuration">
+      <action name="Execute"><command>winecfg</command></action>
+    </item>
+  </menu>
+
+  <menu id="apps-menu" label="📦 Applications">
+    <item label="Text Editor">
+      <action name="Execute"><command>mousepad</command></action>
+    </item>
+    <item label="Office Suite">
+      <action name="Execute"><command>libreoffice</command></action>
+    </item>
+    <item label="PDF Viewer">
+      <action name="Execute"><command>evince</command></action>
+    </item>
+    <item label="Email">
+      <action name="Execute"><command>thunderbird</command></action>
+    </item>
+    <item label="Image Viewer">
+      <action name="Execute"><command>gpicview</command></action>
+    </item>
+    <item label="Image Editor">
+      <action name="Execute"><command>gimp</command></action>
+    </item>
+    <item label="Media Player">
+      <action name="Execute"><command>mpv</command></action>
+    </item>
+    <item label="VLC">
+      <action name="Execute"><command>vlc</command></action>
+    </item>
+    <item label="Archive Manager">
+      <action name="Execute"><command>xarchiver</command></action>
+    </item>
+    <item label="Torrent">
+      <action name="Execute"><command>transmission-gtk</command></action>
+    </item>
+    <item label="Calculator">
+      <action name="Execute"><command>muxos-calculator</command></action>
+    </item>
+    <item label="Notes">
+      <action name="Execute"><command>muxos-notes</command></action>
+    </item>
+    <item label="Screenshot">
+      <action name="Execute"><command>muxos-screenshot</command></action>
+    </item>
+  </menu>
+
+  <menu id="system-menu" label="⚙️ System">
+    <item label="Control Panel">
+      <action name="Execute"><command>muxos-control-panel</command></action>
+    </item>
+    <item label="Task Manager">
+      <action name="Execute"><command>muxos-task-manager</command></action>
+    </item>
+    <item label="System Monitor">
+      <action name="Execute"><command>muxos-monitor</command></action>
+    </item>
+    <item label="Enhanced System Monitor">
+      <action name="Execute"><command>muxos-enhanced-monitor</command></action>
+    </item>
+    <item label="Hardware Detector">
+      <action name="Execute"><command>muxos-hardware-detector</command></action>
+    </item>
+    <item label="Disk Manager">
+      <action name="Execute"><command>muxos-disk-manager</command></action>
+    </item>
+    <item label="Security Center">
+      <action name="Execute"><command>muxos-security-center</command></action>
+    </item>
+    <item label="Update Center">
+      <action name="Execute"><command>muxos-updater</command></action>
+    </item>
+    <separator/>
+    <item label="Network Settings">
+      <action name="Execute"><command>nm-connection-editor</command></action>
+    </item>
+    <item label="Sound Settings">
+      <action name="Execute"><command>pavucontrol</command></action>
+    </item>
+    <item label="Display Settings">
+      <action name="Execute"><command>arandr</command></action>
+    </item>
+    <item label="Appearance">
+      <action name="Execute"><command>lxappearance</command></action>
+    </item>
+    <item label="Package Manager">
+      <action name="Execute"><command>synaptic</command></action>
+    </item>
+  </menu>
+
+  <separator/>
+
+  <item label="🔍 Run...">
+    <action name="Execute"><command>rofi -show drun</command></action>
+  </item>
+
+  <separator/>
+
+  <item label="🔒 Lock Screen">
+    <action name="Execute"><command>dm-tool lock</command></action>
+  </item>
+  
+  <item label="🚪 Logout">
+    <action name="Exit"/>
+  </item>
+  
+  <item label="🔄 Reboot">
+    <action name="Execute"><command>systemctl reboot</command></action>
+  </item>
+  
+  <item label="⏻ Shutdown">
+    <action name="Execute"><command>systemctl poweroff</command></action>
+  </item>
+
+</menu>
+
+</openbox_menu>

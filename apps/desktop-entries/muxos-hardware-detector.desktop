@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=MuxOS Hardware Detector
+Name[es]=Detector de Hardware MuxOS
+Comment=Complete hardware detection and monitoring tool
+Comment[es]=Herramienta completa de detección y monitoreo de hardware
+Exec=/usr/bin/muxos-hardware-detector
+Icon=applications-system
+Terminal=false
+Categories=System;Settings;HardwareSettings;
+Keywords=hardware;system;monitor;detect;wifi;bluetooth;audio;cpu;memory;
+Keywords[es]=hardware;sistema;monitor;detectar;wifi;bluetooth;audio;cpu;memoria;
+StartupNotify=true

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Screenshot
+Comment=Capture screen images
+Exec=/usr/bin/muxos-screenshot
+Icon=applets-screenshooter
+Terminal=false
+Categories=Utility;
+Keywords=screenshot;capture;screen;

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=System Monitor
+Comment=View system resources and processes
+Exec=/usr/bin/muxos-monitor
+Icon=utilities-system-monitor
+Terminal=false
+Categories=System;Monitor;
+Keywords=system;monitor;process;cpu;memory;

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Welcome to MuxOS
+Comment=First-run setup wizard
+Exec=/usr/bin/muxos-welcome
+Icon=help-about
+Terminal=false
+Categories=System;
+Keywords=welcome;setup;wizard;
+X-GNOME-Autostart-enabled=true

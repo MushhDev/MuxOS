@@ -1,0 +1,198 @@
+/* MuxOS Velocity - Rofi Theme */
+/* Blue/Green/Purple gradient design */
+
+* {
+    /* Colors */
+    bg-dark:        #0f0f1a;
+    bg-medium:      #1a1a2e;
+    bg-light:       #252542;
+    bg-card:        #2d2d4a;
+    
+    primary:        #6366f1;
+    secondary:      #8b5cf6;
+    accent:         #06b6d4;
+    
+    text-primary:   #f8fafc;
+    text-secondary: #cbd5e1;
+    text-muted:     #64748b;
+    
+    border:         #3b3b5c;
+    
+    /* Theme */
+    background-color:   transparent;
+    text-color:         @text-primary;
+    
+    margin:     0;
+    padding:    0;
+    spacing:    0;
+}
+
+window {
+    location:           center;
+    width:              650px;
+    border-radius:      16px;
+    background-color:   @bg-medium;
+    border:             2px solid @primary;
+    
+    /* Animation */
+    transparency:       "real";
+}
+
+mainbox {
+    children:           [ inputbar, message, listview ];
+    spacing:            0;
+    padding:            0;
+}
+
+inputbar {
+    children:           [ prompt, entry ];
+    background-color:   @bg-dark;
+    padding:            16px 20px;
+    border-radius:      14px 14px 0 0;
+}
+
+prompt {
+    enabled:            true;
+    padding:            10px 18px;
+    background-color:   @primary;
+    text-color:         @text-primary;
+    border-radius:      8px;
+    margin:             0 12px 0 0;
+    
+    background-image:   linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+entry {
+    padding:            10px 16px;
+    background-color:   @bg-card;
+    text-color:         @text-primary;
+    border-radius:      8px;
+    placeholder:        "Search...";
+    placeholder-color:  @text-muted;
+    cursor:             text;
+    
+    border:             1px solid @border;
+}
+
+entry:focus {
+    border:             1px solid @primary;
+}
+
+message {
+    padding:            12px 20px;
+    background-color:   @bg-light;
+    border-bottom:      1px solid @border;
+}
+
+textbox {
+    text-color:         @text-secondary;
+}
+
+listview {
+    lines:              8;
+    columns:            1;
+    fixed-height:       true;
+    padding:            8px;
+    spacing:            4px;
+    scrollbar:          true;
+    background-color:   @bg-medium;
+    border-radius:      0 0 14px 14px;
+}
+
+scrollbar {
+    width:              4px;
+    handle-width:       4px;
+    handle-color:       @primary;
+    background-color:   @bg-dark;
+    border-radius:      4px;
+    margin:             4px;
+}
+
+element {
+    padding:            12px 16px;
+    spacing:            12px;
+    border-radius:      10px;
+    cursor:             pointer;
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         @text-secondary;
+}
+
+element normal.urgent {
+    background-color:   rgba(239, 68, 68, 0.15);
+    text-color:         #ef4444;
+}
+
+element normal.active {
+    background-color:   rgba(99, 102, 241, 0.15);
+    text-color:         @primary;
+}
+
+element selected.normal {
+    background-color:   @primary;
+    text-color:         @text-primary;
+    
+    background-image:   linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    border:             none;
+}
+
+element selected.urgent {
+    background-color:   #ef4444;
+    text-color:         @text-primary;
+}
+
+element selected.active {
+    background-color:   @accent;
+    text-color:         @text-primary;
+    
+    background-image:   linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
+}
+
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @text-secondary;
+}
+
+element-icon {
+    size:               28px;
+    cursor:             inherit;
+    background-color:   transparent;
+}
+
+element-text {
+    cursor:             inherit;
+    vertical-align:     0.5;
+    horizontal-align:   0.0;
+    background-color:   transparent;
+}
+
+/* Mode switcher */
+mode-switcher {
+    padding:            8px;
+    spacing:            8px;
+    background-color:   @bg-dark;
+}
+
+button {
+    padding:            8px 16px;
+    background-color:   @bg-card;
+    text-color:         @text-secondary;
+    border-radius:      6px;
+    cursor:             pointer;
+}
+
+button selected {
+    background-color:   @primary;
+    text-color:         @text-primary;
+    
+    background-image:   linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+/* Error message */
+error-message {
+    padding:            16px;
+    background-color:   @bg-dark;
+    border-radius:      0 0 14px 14px;
+}

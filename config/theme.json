@@ -1,0 +1,114 @@
+{
+  "name": "MuxOS Velocity",
+  "version": "1.0",
+  
+  "colors": {
+    "primary": "#6366f1",
+    "secondary": "#8b5cf6",
+    "accent": "#06b6d4",
+    "success": "#10b981",
+    "warning": "#f59e0b",
+    "error": "#ef4444",
+    
+    "gradient_start": "#1e1b4b",
+    "gradient_mid": "#312e81",
+    "gradient_end": "#0f172a",
+    
+    "bg_dark": "#0f0f1a",
+    "bg_medium": "#1a1a2e",
+    "bg_light": "#252542",
+    "bg_card": "#2d2d4a",
+    
+    "text_primary": "#f8fafc",
+    "text_secondary": "#cbd5e1",
+    "text_muted": "#64748b",
+    
+    "border": "#3b3b5c",
+    "border_focus": "#6366f1",
+    
+    "panel_bg": "rgba(15, 15, 26, 0.92)",
+    "menu_bg": "rgba(26, 26, 46, 0.95)",
+    "tooltip_bg": "rgba(45, 45, 74, 0.98)"
+  },
+  
+  "gradients": {
+    "main": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f172a 100%)",
+    "accent": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%)",
+    "success": "linear-gradient(135deg, #10b981 0%, #06b6d4 100%)",
+    "gaming": "linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%)",
+    "panel": "linear-gradient(180deg, rgba(15,15,26,0.95) 0%, rgba(26,26,46,0.90) 100%)",
+    "button": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
+    "button_hover": "linear-gradient(135deg, #818cf8 0%, #a78bfa 100%)"
+  },
+  
+  "fonts": {
+    "family": "Inter, Noto Sans, sans-serif",
+    "family_mono": "JetBrains Mono, Fira Code, monospace",
+    "size_xs": "10px",
+    "size_sm": "12px",
+    "size_base": "14px",
+    "size_lg": "16px",
+    "size_xl": "20px",
+    "size_2xl": "24px",
+    "size_3xl": "32px",
+    "weight_normal": "400",
+    "weight_medium": "500",
+    "weight_bold": "700"
+  },
+  
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "24px",
+    "2xl": "32px"
+  },
+  
+  "borders": {
+    "radius_sm": "4px",
+    "radius_md": "8px",
+    "radius_lg": "12px",
+    "radius_xl": "16px",
+    "radius_full": "9999px",
+    "width": "1px"
+  },
+  
+  "shadows": {
+    "sm": "0 1px 2px rgba(0, 0, 0, 0.3)",
+    "md": "0 4px 6px rgba(0, 0, 0, 0.4)",
+    "lg": "0 10px 15px rgba(0, 0, 0, 0.5)",
+    "xl": "0 20px 25px rgba(0, 0, 0, 0.6)",
+    "glow": "0 0 20px rgba(99, 102, 241, 0.4)",
+    "glow_accent": "0 0 20px rgba(6, 182, 212, 0.4)"
+  },
+  
+  "animations": {
+    "duration_fast": "150ms",
+    "duration_normal": "250ms",
+    "duration_slow": "400ms",
+    "easing": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "easing_bounce": "cubic-bezier(0.68, -0.55, 0.265, 1.55)"
+  },
+  
+  "wallpaper": {
+    "path": "/usr/share/backgrounds/muxos-gradient.png",
+    "style": "fill",
+    "blur": false,
+    "dim": 0
+  },
+  
+  "panel": {
+    "height": 42,
+    "position": "bottom",
+    "opacity": 0.92,
+    "blur": true
+  },
+  
+  "window": {
+    "border_width": 1,
+    "title_height": 32,
+    "opacity_inactive": 0.95,
+    "opacity_active": 1.0
+  }
+}

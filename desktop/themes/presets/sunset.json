@@ -1,0 +1,22 @@
+{
+  "name": "MuxOS Sunset",
+  "colors": {
+    "primary": "#f97316",
+    "secondary": "#ec4899",
+    "accent": "#8b5cf6",
+    "success": "#10b981",
+    "warning": "#fbbf24",
+    "error": "#ef4444",
+    "bg_dark": "#1c0a00",
+    "bg_medium": "#2d1810",
+    "bg_light": "#44261a",
+    "bg_card": "#5c3425",
+    "text_primary": "#fff7ed",
+    "text_secondary": "#fed7aa",
+    "text_muted": "#fdba74",
+    "border": "#9a3412",
+    "gradient_start": "#431407",
+    "gradient_mid": "#9a3412",
+    "gradient_end": "#f97316"
+  }
+}

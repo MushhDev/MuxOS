@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Calculator
+Comment=Perform calculations
+Exec=/usr/bin/muxos-calculator
+Icon=accessories-calculator
+Terminal=false
+Categories=Utility;Calculator;
+Keywords=calculator;math;

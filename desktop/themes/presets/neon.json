@@ -1,0 +1,22 @@
+{
+  "name": "MuxOS Neon",
+  "colors": {
+    "primary": "#22d3ee",
+    "secondary": "#a855f7",
+    "accent": "#f43f5e",
+    "success": "#4ade80",
+    "warning": "#facc15",
+    "error": "#f43f5e",
+    "bg_dark": "#030712",
+    "bg_medium": "#0f172a",
+    "bg_light": "#1e293b",
+    "bg_card": "#334155",
+    "text_primary": "#f8fafc",
+    "text_secondary": "#e2e8f0",
+    "text_muted": "#94a3b8",
+    "border": "#475569",
+    "gradient_start": "#0f172a",
+    "gradient_mid": "#1e1b4b",
+    "gradient_end": "#22d3ee"
+  }
+}

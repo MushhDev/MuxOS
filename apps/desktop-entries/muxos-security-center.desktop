@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Security Center
+Comment=System security and protection
+Exec=/usr/bin/muxos-security-center
+Icon=security-high
+Terminal=false
+Categories=System;Security;
+Keywords=security;firewall;antivirus;protection;

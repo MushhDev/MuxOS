@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Theme Editor
+Comment=Customize MuxOS appearance
+Exec=/usr/bin/muxos-theme-editor
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Settings;DesktopSettings;
+Keywords=theme;appearance;colors;fonts;wallpaper;

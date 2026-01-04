@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Task Manager
+Comment=Process and system management
+Exec=/usr/bin/muxos-task-manager
+Icon=utilities-system-monitor
+Terminal=false
+Categories=System;Monitor;
+Keywords=task;process;system;monitor;

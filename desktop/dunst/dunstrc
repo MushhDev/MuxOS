@@ -1,0 +1,161 @@
+# MuxOS Velocity - Dunst Notification Theme
+# Blue/Green/Purple gradient design
+
+[global]
+    # Display settings
+    monitor = 0
+    follow = mouse
+    
+    # Geometry
+    width = 380
+    height = 150
+    origin = top-right
+    offset = 20x60
+    
+    # Progress bar
+    progress_bar = true
+    progress_bar_height = 8
+    progress_bar_frame_width = 0
+    progress_bar_min_width = 150
+    progress_bar_max_width = 350
+    
+    # Show indicator
+    indicate_hidden = yes
+    
+    # Shrink window if smaller than width
+    shrink = no
+    
+    # Transparency (0-100)
+    transparency = 5
+    
+    # Padding
+    padding = 16
+    horizontal_padding = 20
+    text_icon_padding = 16
+    
+    # Frame
+    frame_width = 2
+    frame_color = "#6366f1"
+    
+    # Gap between notifications
+    gap_size = 8
+    
+    # Separator
+    separator_height = 1
+    separator_color = "#3b3b5c"
+    
+    # Sorting
+    sort = yes
+    
+    # Idle threshold
+    idle_threshold = 120
+    
+    # Font
+    font = Inter 11
+    
+    # Line height
+    line_height = 4
+    
+    # Markup
+    markup = full
+    format = "<b>%s</b>\n%b"
+    
+    # Alignment
+    alignment = left
+    vertical_alignment = center
+    
+    # Age
+    show_age_threshold = 60
+    
+    # Word wrap
+    word_wrap = yes
+    
+    # Ellipsize
+    ellipsize = end
+    
+    # Ignore newlines
+    ignore_newline = no
+    
+    # Stack duplicates
+    stack_duplicates = true
+    hide_duplicate_count = false
+    
+    # Show indicators
+    show_indicators = yes
+    
+    # Icons
+    icon_position = left
+    min_icon_size = 48
+    max_icon_size = 64
+    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
+    
+    # History
+    sticky_history = yes
+    history_length = 20
+    
+    # Misc
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    
+    # Corners
+    corner_radius = 12
+    
+    # Mouse actions
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#1a1a2e"
+    foreground = "#cbd5e1"
+    frame_color = "#3b3b5c"
+    timeout = 5
+    icon = dialog-information
+
+[urgency_normal]
+    background = "#1a1a2e"
+    foreground = "#f8fafc"
+    frame_color = "#6366f1"
+    timeout = 8
+    icon = dialog-information
+
+[urgency_critical]
+    background = "#1a1a2e"
+    foreground = "#f8fafc"
+    frame_color = "#ef4444"
+    timeout = 0
+    icon = dialog-warning
+
+# App-specific rules
+[discord]
+    appname = Discord
+    frame_color = "#5865F2"
+
+[steam]
+    appname = Steam
+    frame_color = "#1b2838"
+
+[spotify]
+    appname = Spotify
+    frame_color = "#1DB954"
+
+[firefox]
+    appname = Firefox
+    frame_color = "#FF7139"
+
+[muxos-updates]
+    appname = "MuxOS Updates"
+    frame_color = "#06b6d4"
+    timeout = 15
+
+[muxos-gaming]
+    appname = "MuxOS Gaming"
+    frame_color = "#8b5cf6"
+    
+[muxos-security]
+    appname = "MuxOS Security"
+    frame_color = "#10b981"

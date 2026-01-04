@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Disk Manager
+Comment=Storage management and cleanup
+Exec=/usr/bin/muxos-disk-manager
+Icon=drive-harddisk
+Terminal=false
+Categories=System;Utility;
+Keywords=disk;storage;partition;backup;
