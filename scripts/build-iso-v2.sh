@@ -59,7 +59,7 @@ apt install -y \
     bluez blueman \
     xorg xserver-xorg-video-all openbox obconf picom tint2 \
     lightdm lightdm-gtk-greeter feh rofi dunst lxappearance \
-    polkit-1 policykit-1-gnome volumeicon-alsa network-manager-gnome \
+    polkit policykit-1-gnome volumeicon-alsa network-manager-gnome \
     locales fonts-noto fonts-noto-color-emoji fonts-noto-cjk \
     udisks2 gvfs gvfs-backends udiskie exfatprogs ntfs-3g
 CHROOT
