@@ -32,6 +32,8 @@ cd MuxOS
 
 2. **Run the build script**:
 ```bash
+dos2unix config/muxos.conf
+
 chmod +x scripts/build-iso.sh
 
 sudo ./scripts/build-iso.sh
@@ -65,5 +67,6 @@ Edit `config/muxos.conf` to customize:
 **Missing dependencies**: Run the prerequisites installation command again
 
 **ISO won't boot**: Verify BIOS/UEFI settings and secure boot configuration
+
 
 
