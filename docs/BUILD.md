@@ -26,7 +26,7 @@ sudo apt install -y \
 
 1. **Clone the repository**:
 ```bash
-git clone <repository-url>
+git clone https://github.com/MushhDev/MuxOS.git
 cd MuxOS
 ```
 
@@ -67,6 +67,7 @@ Edit `config/muxos.conf` to customize:
 **Missing dependencies**: Run the prerequisites installation command again
 
 **ISO won't boot**: Verify BIOS/UEFI settings and secure boot configuration
+
 
 
 
