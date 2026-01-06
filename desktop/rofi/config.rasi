@@ -1,83 +1,161 @@
-/* MuxOS Rofi Configuration */
+/* MuxOS Velocity - Modern Rofi Theme */
+/* Glassmorphism design with purple accents */
 
 configuration {
-    modi: "drun,run,window";
+    modi: "drun,run,window,filebrowser";
     show-icons: true;
-    icon-theme: "Papirus";
-    font: "Sans 11";
-    display-drun: "Applications";
-    display-run: "Commands";
-    display-window: "Windows";
+    icon-theme: "Papirus-Dark";
+    font: "Inter 11";
+    display-drun: " Apps";
+    display-run: " Run";
+    display-window: " Windows";
+    display-filebrowser: " Files";
     drun-display-format: "{name}";
     terminal: "xfce4-terminal";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
 }
 
 * {
-    bg: #1a1a2e;
-    bg-alt: #16213e;
-    fg: #eaeaea;
-    fg-alt: #888888;
-    accent: #0f3460;
-    urgent: #e94560;
+    /* MuxOS Velocity Colors */
+    bg: #09090fdd;
+    bg-alt: #12121cee;
+    bg-selected: #7c3aed33;
+    fg: #fafafa;
+    fg-alt: #a1a1aa;
+    accent: #7c3aed;
+    accent-alt: #a855f7;
+    urgent: #f87171;
+    success: #34d399;
     
-    background-color: @bg;
+    background-color: transparent;
     text-color: @fg;
     border-color: @accent;
 }
 
 window {
-    width: 600px;
-    border: 2px;
-    border-radius: 10px;
-    padding: 20px;
+    width: 680px;
+    background-color: @bg;
+    border: 1px solid;
+    border-color: #27273a88;
+    border-radius: 16px;
+    padding: 24px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 16px;
 }
 
 inputbar {
     children: [prompt, entry];
     background-color: @bg-alt;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0 0 10px 0;
+    border: 1px solid;
+    border-color: #27273a;
+    border-radius: 12px;
+    padding: 14px 16px;
 }
 
 prompt {
     background-color: @accent;
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 8px;
     text-color: @fg;
-    margin: 0 10px 0 0;
+    margin: 0 12px 0 0;
+    font: "Inter Bold 11";
 }
 
 entry {
     padding: 8px;
     background-color: transparent;
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
 }
 
 listview {
-    lines: 8;
+    lines: 7;
     columns: 1;
     fixed-height: true;
     scrollbar: false;
+    spacing: 4px;
+    background-color: transparent;
 }
 
 element {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 element normal.normal {
     background-color: transparent;
 }
 
+element alternate.normal {
+    background-color: transparent;
+}
+
 element selected.normal {
+    background-color: @bg-selected;
+    border: 1px solid;
+    border-color: @accent;
+}
+
+element selected.active {
     background-color: @accent;
 }
 
 element-icon {
-    size: 24px;
-    margin: 0 10px 0 0;
+    size: 28px;
+    margin: 0 14px 0 0;
+    cursor: inherit;
 }
 
 element-text {
     vertical-align: 0.5;
+    cursor: inherit;
+    highlight: bold underline;
+}
+
+element-text selected {
+    text-color: @fg;
+}
+
+scrollbar {
+    width: 4px;
+    handle-width: 4px;
+    handle-color: @accent;
+    border-radius: 4px;
+}
+
+message {
+    background-color: @bg-alt;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @fg-alt;
+}
+
+mode-switcher {
+    spacing: 8px;
+}
+
+button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: @bg-alt;
+    text-color: @fg-alt;
+    cursor: pointer;
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @fg;
 }

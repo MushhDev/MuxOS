@@ -1,5 +1,5 @@
-# MuxOS Velocity - Dunst Notification Theme
-# Blue/Green/Purple gradient design
+# MuxOS Velocity 2.0 - Dunst Notification Theme
+# Modern glassmorphism design with purple accents
 
 [global]
     # Display settings
@@ -7,17 +7,18 @@
     follow = mouse
     
     # Geometry
-    width = 380
-    height = 150
+    width = (320, 420)
+    height = 180
     origin = top-right
-    offset = 20x60
+    offset = 16x56
     
     # Progress bar
     progress_bar = true
-    progress_bar_height = 8
+    progress_bar_height = 6
     progress_bar_frame_width = 0
-    progress_bar_min_width = 150
-    progress_bar_max_width = 350
+    progress_bar_min_width = 180
+    progress_bar_max_width = 380
+    progress_bar_corner_radius = 3
     
     # Show indicator
     indicate_hidden = yes
@@ -26,23 +27,23 @@
     shrink = no
     
     # Transparency (0-100)
-    transparency = 5
+    transparency = 8
     
     # Padding
-    padding = 16
-    horizontal_padding = 20
-    text_icon_padding = 16
+    padding = 18
+    horizontal_padding = 22
+    text_icon_padding = 18
     
     # Frame
-    frame_width = 2
-    frame_color = "#6366f1"
+    frame_width = 1
+    frame_color = "#7c3aed"
     
     # Gap between notifications
-    gap_size = 8
+    gap_size = 10
     
     # Separator
     separator_height = 1
-    separator_color = "#3b3b5c"
+    separator_color = "#27273a"
     
     # Sorting
     sort = yes
@@ -58,7 +59,7 @@
     
     # Markup
     markup = full
-    format = "<b>%s</b>\n%b"
+    format = "<b>%s</b>\n<span size='small'>%b</span>"
     
     # Alignment
     alignment = left
@@ -87,11 +88,11 @@
     icon_position = left
     min_icon_size = 48
     max_icon_size = 64
-    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps/
+    icon_path = /usr/share/icons/Papirus-Dark/48x48/status/:/usr/share/icons/Papirus-Dark/48x48/devices/:/usr/share/icons/Papirus-Dark/48x48/apps/
     
     # History
     sticky_history = yes
-    history_length = 20
+    history_length = 30
     
     # Misc
     always_run_script = true
@@ -99,7 +100,7 @@
     class = Dunst
     
     # Corners
-    corner_radius = 12
+    corner_radius = 14
     
     # Mouse actions
     mouse_left_click = close_current
@@ -110,23 +111,26 @@
     per_monitor_dpi = false
 
 [urgency_low]
-    background = "#1a1a2e"
-    foreground = "#cbd5e1"
-    frame_color = "#3b3b5c"
+    background = "#12121cee"
+    foreground = "#a1a1aa"
+    frame_color = "#27273a"
+    highlight = "#7c3aed"
     timeout = 5
     icon = dialog-information
 
 [urgency_normal]
-    background = "#1a1a2e"
-    foreground = "#f8fafc"
-    frame_color = "#6366f1"
+    background = "#12121cee"
+    foreground = "#fafafa"
+    frame_color = "#7c3aed"
+    highlight = "#a855f7"
     timeout = 8
     icon = dialog-information
 
 [urgency_critical]
-    background = "#1a1a2e"
-    foreground = "#f8fafc"
-    frame_color = "#ef4444"
+    background = "#12121cee"
+    foreground = "#fafafa"
+    frame_color = "#f87171"
+    highlight = "#f87171"
     timeout = 0
     icon = dialog-warning
 
@@ -134,9 +138,12 @@
 [discord]
     appname = Discord
     frame_color = "#5865F2"
+    background = "#12121cee"
 
 [steam]
     appname = Steam
+    frame_color = "#1b2838"
+    background = "#12121cee"
     frame_color = "#1b2838"
 
 [spotify]

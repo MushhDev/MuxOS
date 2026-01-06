@@ -1,59 +1,78 @@
 #!/bin/bash
-# MuxOS Velocity - Openbox Autostart
-# Beautiful animations and gradient theme
+# MuxOS Velocity 2.0 - Openbox Autostart
+# Modern desktop with glassmorphism effects
 
-# Load theme configuration
+# ============================================
+# Theme Configuration
+# ============================================
 THEME_CONFIG="$HOME/.config/muxos/theme.json"
+export GTK_THEME="MuxOS-Velocity"
 
-# Set wallpaper with MuxOS gradient
-if [ -f "/usr/share/backgrounds/muxos-velocity-1920x1080.png" ]; then
+# ============================================
+# Wallpaper
+# ============================================
+if [ -f "/usr/share/backgrounds/muxos-velocity.png" ]; then
+    feh --bg-fill /usr/share/backgrounds/muxos-velocity.png &
+elif [ -f "/usr/share/backgrounds/muxos-velocity-1920x1080.png" ]; then
     feh --bg-fill /usr/share/backgrounds/muxos-velocity-1920x1080.png &
-elif [ -f "/usr/share/backgrounds/muxos-default.png" ]; then
-    feh --bg-fill /usr/share/backgrounds/muxos-default.png &
 else
-    # Fallback to solid color
-    hsetroot -solid "#1a1a2e" &
+    # Fallback to solid dark color
+    hsetroot -solid "#09090f" &
 fi
 
-# Start compositor with animations and effects
-picom --config /etc/xdg/picom/picom-velocity.conf &
+# ============================================
+# Compositor (Picom with blur and animations)
+# ============================================
+picom --config /etc/xdg/picom/picom.conf -b &
 
-# Start panel with velocity theme
-tint2 -c /etc/xdg/tint2/tint2rc-velocity &
+# ============================================
+# Panel
+# ============================================
+sleep 0.5
+tint2 -c /etc/xdg/tint2/tint2rc &
 
-# Start network manager applet
-sleep 1 && nm-applet &
-
-# Start volume control applet
+# ============================================
+# System Tray Applets
+# ============================================
+sleep 1
+nm-applet &
 volumeicon &
-
-# Start notification daemon with velocity theme
-dunst -config /etc/xdg/dunst/dunstrc &
-
-# Auto-mount removable drives (USB) via udisks2
 udiskie --tray &
 
-# Disable screen blanking for gaming
-xset s off
-xset -dpms
-xset s noblank
+# ============================================
+# Notification Daemon
+# ============================================
+dunst -config /etc/xdg/dunst/dunstrc &
 
-# Set keyboard repeat rate (faster for gaming)
-xset r rate 200 40
+# ============================================
+# Display Settings (Gaming optimized)
+# ============================================
+xset s off          # Disable screen saver
+xset -dpms          # Disable power management
+xset s noblank      # Disable screen blanking
+xset r rate 200 40  # Fast keyboard repeat
 
-# Start polkit agent for authentication
+# ============================================
+# Authentication Agent
+# ============================================
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
-# Apply gaming optimizations
+# ============================================
+# Gaming Optimizations
+# ============================================
 gamemode -s &
 
-# Start update checker daemon (background)
+# ============================================
+# Background Services
+# ============================================
 /usr/bin/muxos-updater --daemon &
 
-# Show welcome on first run
-FIRST_BOOT_SYSTEM_MARKER="/var/lib/muxos/.firstboot_complete"
-if [ ! -f "$FIRST_BOOT_SYSTEM_MARKER" ]; then
+# ============================================
+# First Boot Welcome
+# ============================================
+FIRST_BOOT_MARKER="/var/lib/muxos/.firstboot_complete"
+if [ ! -f "$FIRST_BOOT_MARKER" ]; then
     mkdir -p "$HOME/.config/muxos"
     sleep 2
-    /usr/bin/muxos-welcome
+    /usr/bin/muxos-welcome &
 fi

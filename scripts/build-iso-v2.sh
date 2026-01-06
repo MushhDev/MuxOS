@@ -1,5 +1,6 @@
 #!/bin/bash
-# MuxOS ISO Build Script v2 - Fixed for Debian 12/13
+# MuxOS Velocity 2.0 - ISO Build Script
+# Pure Linux Gaming Distribution
 
 set -e
 
@@ -43,17 +44,15 @@ cleanup() {
 trap cleanup EXIT
 
 cat > "$CHROOT_DIR/etc/apt/sources.list" <<EOF
-deb http://deb.debian.org/debian $BASE_RELEASE main contrib non-free non-free-firmware
-deb http://deb.debian.org/debian $BASE_RELEASE-updates main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian/ $BASE_RELEASE main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian/ $BASE_RELEASE-updates main contrib non-free non-free-firmware
 deb http://security.debian.org/debian-security $BASE_RELEASE-security main contrib non-free non-free-firmware
 EOF
 
 log_info "Installing base packages..."
 chroot "$CHROOT_DIR" /bin/bash <<'CHROOT'
 export DEBIAN_FRONTEND=noninteractive
-apt update
-apt upgrade -y
-
+apt update && apt upgrade -y
 apt install -y \
     linux-image-amd64 linux-headers-amd64 firmware-linux firmware-linux-nonfree \
     grub-pc-bin grub-efi-amd64-bin live-boot systemd-sysv \
@@ -61,7 +60,7 @@ apt install -y \
     bluez blueman \
     xorg xserver-xorg-video-all openbox obconf picom tint2 \
     lightdm lightdm-gtk-greeter feh rofi dunst lxappearance \
-    polkit policykit-1-gnome volumeicon-alsa \
+    polkit-1 policykit-1-gnome volumeicon-alsa network-manager-gnome \
     locales fonts-noto fonts-noto-color-emoji fonts-noto-cjk \
     udisks2 gvfs gvfs-backends udiskie exfatprogs ntfs-3g
 CHROOT
@@ -95,18 +94,91 @@ CHROOT
 
 log_info "Copying MuxOS applications..."
 
-mkdir -p "$CHROOT_DIR/usr/bin" \
-         "$CHROOT_DIR/usr/share/applications" \
-         "$CHROOT_DIR/usr/share/muxos" \
-         "$CHROOT_DIR/usr/lib/muxos" \
-         "$CHROOT_DIR/usr/share/polkit-1/actions"
+mkdir -p "$CHROOT_DIR/usr/bin"
+mkdir -p "$CHROOT_DIR/usr/share/applications"
+mkdir -p "$CHROOT_DIR/usr/share/muxos"
 
-cp "$PROJECT_ROOT/apps/"**/*.py "$CHROOT_DIR/usr/bin/" 2>/dev/null || true
+# Copy all Python applications
+cp "$PROJECT_ROOT/apps/control-panel/muxos-control-center.py" "$CHROOT_DIR/usr/bin/muxos-control-center"
+cp "$PROJECT_ROOT/apps/control-panel/muxos-control-panel.py" "$CHROOT_DIR/usr/bin/muxos-control-panel" 2>/dev/null || true
+cp "$PROJECT_ROOT/apps/system-monitor/muxos-monitor.py" "$CHROOT_DIR/usr/bin/muxos-monitor"
+cp "$PROJECT_ROOT/apps/system-monitor/muxos-hardware-detector.py" "$CHROOT_DIR/usr/bin/muxos-hardware-detector"
+cp "$PROJECT_ROOT/apps/system-monitor/muxos-enhanced-monitor.py" "$CHROOT_DIR/usr/bin/muxos-enhanced-monitor"
+cp "$PROJECT_ROOT/apps/security/muxos-security-center.py" "$CHROOT_DIR/usr/bin/muxos-security-center"
+cp "$PROJECT_ROOT/apps/storage/muxos-disk-manager.py" "$CHROOT_DIR/usr/bin/muxos-disk-manager"
+cp "$PROJECT_ROOT/apps/gaming/muxos-game-center.py" "$CHROOT_DIR/usr/bin/muxos-game-center"
+cp "$PROJECT_ROOT/apps/updater/muxos-updater.py" "$CHROOT_DIR/usr/bin/muxos-updater"
+cp "$PROJECT_ROOT/apps/utilities/muxos-task-manager.py" "$CHROOT_DIR/usr/bin/muxos-task-manager"
+cp "$PROJECT_ROOT/apps/utilities/muxos-screenshot.py" "$CHROOT_DIR/usr/bin/muxos-screenshot"
+cp "$PROJECT_ROOT/apps/utilities/muxos-notes.py" "$CHROOT_DIR/usr/bin/muxos-notes"
+cp "$PROJECT_ROOT/apps/utilities/muxos-calculator.py" "$CHROOT_DIR/usr/bin/muxos-calculator"
+cp "$PROJECT_ROOT/apps/welcome/muxos-welcome.py" "$CHROOT_DIR/usr/bin/muxos-welcome"
+
 chmod +x "$CHROOT_DIR/usr/bin/muxos-"*
 
-cp "$PROJECT_ROOT/apps/"**/*.desktop "$CHROOT_DIR/usr/share/applications/" 2>/dev/null || true
+# Copy desktop entries
+cp "$PROJECT_ROOT/apps/desktop-entries/"*.desktop "$CHROOT_DIR/usr/share/applications/"
+cp "$PROJECT_ROOT/apps/control-panel/"*.desktop "$CHROOT_DIR/usr/share/applications/" 2>/dev/null || true
+cp "$PROJECT_ROOT/apps/system-monitor/"*.desktop "$CHROOT_DIR/usr/share/applications/" 2>/dev/null || true
+cp "$PROJECT_ROOT/apps/updater/"*.desktop "$CHROOT_DIR/usr/share/applications/" 2>/dev/null || true
 
-cp "$PROJECT_ROOT/system/polkit/"*.policy "$CHROOT_DIR/usr/share/polkit-1/actions/" 2>/dev/null || true
+# Copy system files
+mkdir -p "$CHROOT_DIR/usr/share/muxos/optimizations"
+mkdir -p "$CHROOT_DIR/usr/share/muxos/drivers"
+mkdir -p "$CHROOT_DIR/usr/share/muxos/security"
+mkdir -p "$CHROOT_DIR/usr/share/muxos"
+mkdir -p "$CHROOT_DIR/etc"
+
+mkdir -p "$CHROOT_DIR/usr/lib/muxos"
+mkdir -p "$CHROOT_DIR/usr/share/polkit-1/actions"
+
+cp "$PROJECT_ROOT/system/optimizations/"*.sh "$CHROOT_DIR/usr/share/muxos/optimizations/"
+cp "$PROJECT_ROOT/system/drivers/"*.sh "$CHROOT_DIR/usr/share/muxos/drivers/"
+cp "$PROJECT_ROOT/system/security/"*.sh "$CHROOT_DIR/usr/share/muxos/security/"
+
+cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/etc/muxos.conf"
+cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/usr/share/muxos/muxos.conf"
+
+cp "$PROJECT_ROOT/system/setup/muxos-firstboot-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-firstboot-helper.py"
+chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-firstboot-helper.py"
+
+cp "$PROJECT_ROOT/system/security/muxos-security-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py"
+chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py"
+
+cp "$PROJECT_ROOT/system/updater/muxos-update-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py"
+chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py"
+
+cp "$PROJECT_ROOT/system/polkit/com.muxos.firstboot.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.firstboot.policy"
+cp "$PROJECT_ROOT/system/polkit/com.muxos.security.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.security.policy"
+cp "$PROJECT_ROOT/system/polkit/com.muxos.updater.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.updater.policy"
+chmod +x "$CHROOT_DIR/usr/share/muxos/"*/*.sh
+
+# Copy desktop configuration
+mkdir -p "$CHROOT_DIR/etc/xdg/openbox"
+cp "$PROJECT_ROOT/desktop/openbox/rc.xml" "$CHROOT_DIR/etc/xdg/openbox/"
+cp "$PROJECT_ROOT/desktop/openbox/autostart" "$CHROOT_DIR/etc/xdg/openbox/"
+chmod +x "$CHROOT_DIR/etc/xdg/openbox/autostart"
+
+mkdir -p "$CHROOT_DIR/etc/xdg/picom"
+cp "$PROJECT_ROOT/desktop/picom/picom.conf" "$CHROOT_DIR/etc/xdg/picom/"
+
+mkdir -p "$CHROOT_DIR/etc/xdg/tint2"
+cp "$PROJECT_ROOT/desktop/tint2/tint2rc" "$CHROOT_DIR/etc/xdg/tint2/"
+
+mkdir -p "$CHROOT_DIR/etc/xdg/rofi"
+cp "$PROJECT_ROOT/desktop/rofi/config.rasi" "$CHROOT_DIR/etc/xdg/rofi/"
+
+mkdir -p "$CHROOT_DIR/etc/xdg/dunst"
+cp "$PROJECT_ROOT/desktop/dunst/dunstrc" "$CHROOT_DIR/etc/xdg/dunst/"
+
+cp "$PROJECT_ROOT/desktop/lightdm/lightdm-gtk-greeter.conf" "$CHROOT_DIR/etc/lightdm/"
+
+# Copy GTK theme
+mkdir -p "$CHROOT_DIR/usr/share/themes/MuxOS-Velocity"
+cp -r "$PROJECT_ROOT/desktop/themes/MuxOS-Velocity/"* "$CHROOT_DIR/usr/share/themes/MuxOS-Velocity/"
+
+# Copy systemd services
+cp "$PROJECT_ROOT/system/services/"*.service "$CHROOT_DIR/etc/systemd/system/"
 
 log_info "Configuring system..."
 chroot "$CHROOT_DIR" /bin/bash <<CHROOT
@@ -141,9 +213,16 @@ mkdir -p "$ISO_DIR/boot/grub"
 cat > "$ISO_DIR/boot/grub/grub.cfg" <<EOF
 set timeout=5
 set default=0
+insmod all_video
+set gfxmode=auto
+terminal_output gfxterm
 
-menuentry "MuxOS Live" {
+menuentry "MuxOS - Live" {
     linux /live/vmlinuz boot=live quiet splash
+    initrd /live/initrd
+}
+menuentry "MuxOS - Safe Mode" {
+    linux /live/vmlinuz boot=live nomodeset
     initrd /live/initrd
 }
 EOF
@@ -156,3 +235,4 @@ sha256sum "$ISO_NAME" > "$ISO_NAME.sha256"
 
 log_info "Build complete!"
 log_info "ISO: $BUILD_DIR/$ISO_NAME"
+log_info "SHA256: $(cat $ISO_NAME.sha256)"

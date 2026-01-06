@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- MuxOS Velocity 2.0 - Openbox Configuration -->
 <openbox_config xmlns="http://openbox.org/3.4/rc">
   <resistance>
     <strength>10</strength>
@@ -10,7 +11,7 @@
     <followMouse>no</followMouse>
     <focusLast>yes</focusLast>
     <underMouse>no</underMouse>
-    <focusDelay>200</focusDelay>
+    <focusDelay>150</focusDelay>
     <raiseOnFocus>no</raiseOnFocus>
   </focus>
   
@@ -22,21 +23,45 @@
   </placement>
   
   <theme>
-    <name>MuxOS</name>
+    <name>MuxOS-Velocity</name>
     <titleLayout>NLIMC</titleLayout>
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>Sans</name>
+      <name>Inter</name>
       <size>10</size>
-      <weight>bold</weight>
-      <slant>normal</slant>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
     </font>
     <font place="InactiveWindow">
-      <name>Sans</name>
+      <name>Inter</name>
       <size>10</size>
-      <weight>normal</weight>
-      <slant>normal</slant>
+      <weight>Normal</weight>
+      <slant>Normal</slant>
+    </font>
+    <font place="MenuHeader">
+      <name>Inter</name>
+      <size>10</size>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
+    </font>
+    <font place="MenuItem">
+      <name>Inter</name>
+      <size>10</size>
+      <weight>Normal</weight>
+      <slant>Normal</slant>
+    </font>
+    <font place="ActiveOnScreenDisplay">
+      <name>Inter</name>
+      <size>11</size>
+      <weight>Bold</weight>
+      <slant>Normal</slant>
+    </font>
+    <font place="InactiveOnScreenDisplay">
+      <name>Inter</name>
+      <size>11</size>
+      <weight>Normal</weight>
+      <slant>Normal</slant>
     </font>
   </theme>
   
@@ -44,12 +69,12 @@
     <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
-      <name>Desktop 1</name>
-      <name>Desktop 2</name>
-      <name>Desktop 3</name>
-      <name>Desktop 4</name>
+      <name>Main</name>
+      <name>Work</name>
+      <name>Gaming</name>
+      <name>Media</name>
     </names>
-    <popupTime>875</popupTime>
+    <popupTime>800</popupTime>
   </desktops>
   
   <resize>
@@ -71,6 +96,11 @@
     <keybind key="A-F10">
       <action name="ToggleMaximize"/>
     </keybind>
+    <keybind key="A-F11">
+      <action name="ToggleFullscreen"/>
+    </keybind>
+    
+    <!-- Window snapping -->
     <keybind key="W-Left">
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo">
@@ -89,6 +119,55 @@
         <height>100%</height>
       </action>
     </keybind>
+    <keybind key="W-Up">
+      <action name="Maximize"/>
+    </keybind>
+    <keybind key="W-Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <width>80%</width>
+        <height>80%</height>
+      </action>
+      <action name="MoveToCenter"/>
+    </keybind>
+    
+    <!-- Quarter tiling -->
+    <keybind key="W-C-Left">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-C-Right">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-C-Up">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
+    <keybind key="W-C-Down">
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo">
+        <x>-0</x>
+        <y>-0</y>
+        <width>50%</width>
+        <height>50%</height>
+      </action>
+    </keybind>
     
     <!-- Application launchers -->
     <keybind key="W-e">
@@ -103,12 +182,37 @@
     </keybind>
     <keybind key="W-r">
       <action name="Execute">
-        <command>rofi -show drun</command>
+        <command>rofi -show drun -theme /etc/xdg/rofi/config.rasi</command>
+      </action>
+    </keybind>
+    <keybind key="W-Tab">
+      <action name="Execute">
+        <command>rofi -show window -theme /etc/xdg/rofi/config.rasi</command>
       </action>
     </keybind>
     <keybind key="W-l">
       <action name="Execute">
         <command>dm-tool lock</command>
+      </action>
+    </keybind>
+    <keybind key="W-b">
+      <action name="Execute">
+        <command>firefox-esr</command>
+      </action>
+    </keybind>
+    <keybind key="W-s">
+      <action name="Execute">
+        <command>muxos-control-center</command>
+      </action>
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute">
+        <command>muxos-screenshot</command>
+      </action>
+    </keybind>
+    <keybind key="W-Print">
+      <action name="Execute">
+        <command>muxos-screenshot --window</command>
       </action>
     </keybind>
     
@@ -123,6 +227,81 @@
       <action name="GoToDesktop">
         <to>right</to>
         <wrap>yes</wrap>
+      </action>
+    </keybind>
+    <keybind key="W-1">
+      <action name="GoToDesktop">
+        <to>1</to>
+      </action>
+    </keybind>
+    <keybind key="W-2">
+      <action name="GoToDesktop">
+        <to>2</to>
+      </action>
+    </keybind>
+    <keybind key="W-3">
+      <action name="GoToDesktop">
+        <to>3</to>
+      </action>
+    </keybind>
+    <keybind key="W-4">
+      <action name="GoToDesktop">
+        <to>4</to>
+      </action>
+    </keybind>
+    
+    <!-- Move window to desktop -->
+    <keybind key="W-S-1">
+      <action name="SendToDesktop">
+        <to>1</to>
+        <follow>no</follow>
+      </action>
+    </keybind>
+    <keybind key="W-S-2">
+      <action name="SendToDesktop">
+        <to>2</to>
+        <follow>no</follow>
+      </action>
+    </keybind>
+    <keybind key="W-S-3">
+      <action name="SendToDesktop">
+        <to>3</to>
+        <follow>no</follow>
+      </action>
+    </keybind>
+    <keybind key="W-S-4">
+      <action name="SendToDesktop">
+        <to>4</to>
+        <follow>no</follow>
+      </action>
+    </keybind>
+    
+    <!-- Volume control -->
+    <keybind key="XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>pactl set-sink-volume @DEFAULT_SINK@ +5%</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>pactl set-sink-volume @DEFAULT_SINK@ -5%</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioMute">
+      <action name="Execute">
+        <command>pactl set-sink-mute @DEFAULT_SINK@ toggle</command>
+      </action>
+    </keybind>
+    
+    <!-- Brightness control -->
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>brightnessctl set +10%</command>
+      </action>
+    </keybind>
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>brightnessctl set 10%-</command>
       </action>
     </keybind>
   </keyboard>

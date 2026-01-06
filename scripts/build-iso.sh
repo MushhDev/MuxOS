@@ -113,7 +113,7 @@ apt install -y \
     dunst \
     volumeicon-alsa \
     network-manager-gnome \
-    polkit \
+    polkit-1 \
     policykit-1-gnome
 CHROOT_COMMANDS
 

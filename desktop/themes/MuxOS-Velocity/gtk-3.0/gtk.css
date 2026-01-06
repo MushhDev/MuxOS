@@ -1,144 +1,168 @@
-/* MuxOS Velocity GTK3 Theme - Blue/Green/Purple Gradients */
+/* MuxOS Velocity 2.0 GTK3 Theme */
+/* Modern glassmorphism with purple accents */
 /* Compatible with GTK 3.20+ */
+
+/* === Color Variables Reference === */
+/*
+ * Primary: #7c3aed
+ * Secondary: #a855f7
+ * Accent: #22d3ee
+ * Success: #34d399
+ * Warning: #fbbf24
+ * Error: #f87171
+ * Background Dark: #09090f
+ * Background Medium: #12121c
+ * Background Light: #1c1c2e
+ * Background Card: #242438
+ * Text Primary: #fafafa
+ * Text Secondary: #a1a1aa
+ * Border: #27273a
+ */
 
 /* === Global Styles === */
 * {
     outline-style: none;
     outline-width: 0px;
+    -gtk-outline-radius: 8px;
 }
 
 /* === Window === */
 window {
-    background-color: #1a1a2e;
-    color: #98c5f1;
+    background-color: #09090f;
+    color: #fafafa;
 }
 
 window.background {
-    background-image: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f172a 100%);
+    background-image: linear-gradient(135deg, #0c0a1d 0%, #1e1b4b 40%, #0f172a 100%);
 }
 
 /* === Header Bar === */
 headerbar {
-    background-image: linear-gradient(to bottom, #252542 0%, #1a1a2e 100%);
-    border-bottom: 1px solid #3b3b5c;
-    padding: 6px 8px;
-    min-height: 38px;
-    color: #f8fafc;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(180deg, #12121c 0%, #09090f 100%);
+    border-bottom: 1px solid #27273a;
+    padding: 6px 10px;
+    min-height: 40px;
+    color: #fafafa;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 headerbar:backdrop {
-    background-color: #1a1a2e;
+    background-color: #09090f;
     background-image: none;
 }
 
 headerbar .title {
-    color: #f8fafc;
+    color: #fafafa;
     font-weight: 600;
+    font-size: 14px;
 }
 
 headerbar .subtitle {
-    color: #cbd5e1;
-    font-size: smaller;
+    color: #a1a1aa;
+    font-size: 11px;
 }
 
 /* === Buttons === */
 button {
-    background-image: linear-gradient(to bottom, #3b3b5c 0%, #2d2d4a 100%);
-    border: 1px solid #3b3b5c;
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: #f8fafc;
+    background-image: linear-gradient(180deg, #242438 0%, #1c1c2e 100%);
+    border: 1px solid #27273a;
+    border-radius: 10px;
+    padding: 8px 18px;
+    color: #fafafa;
     font-weight: 500;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    transition: all 200ms ease;
 }
 
 button:hover {
-    background-image: linear-gradient(to bottom, #4a4a6a 0%, #3b3b5c 100%);
-    border-color: #6366f1;
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+    background-image: linear-gradient(180deg, #2a2a42 0%, #242438 100%);
+    border-color: #7c3aed;
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.35);
 }
 
 button:active {
-    background-image: linear-gradient(to bottom, #2d2d4a 0%, #252542 100%);
+    background-image: linear-gradient(180deg, #1c1c2e 0%, #12121c 100%);
 }
 
 button:checked,
 button.suggested-action {
-    background-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    border-color: #818cf8;
+    background-image: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    border-color: #a855f7;
     color: white;
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.45);
 }
 
 button.suggested-action:hover {
-    background-image: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    background-image: linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%);
+    box-shadow: 0 0 24px rgba(124, 58, 237, 0.55);
 }
 
 button.destructive-action {
-    background-image: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    background-image: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
     border-color: #f87171;
     color: white;
 }
 
 button.destructive-action:hover {
-    background-image: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    background-image: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
 }
 
 button:disabled {
     background-image: none;
-    background-color: #0f0f1a;
-    color: #64748b;
+    background-color: #12121c;
+    color: #52525b;
     box-shadow: none;
+    border-color: #1f1f2e;
 }
 
 /* === Entries === */
 entry {
-    background-color: #0f0f1a;
-    border: 1px solid #3b3b5c;
-    border-radius: 8px;
-    padding: 8px 12px;
-    color: #f8fafc;
-    caret-color: #06b6d4;
+    background-color: #12121c;
+    border: 1px solid #27273a;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #fafafa;
+    caret-color: #7c3aed;
+    transition: all 200ms ease;
 }
 
 entry:focus {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25);
 }
 
 entry:disabled {
-    background-color: #1a1a2e;
-    color: #64748b;
+    background-color: #09090f;
+    color: #52525b;
 }
 
 entry selection {
-    background-color: #6366f1;
+    background-color: #7c3aed;
     color: white;
 }
 
 /* === Switches === */
 switch {
-    background-color: #0f0f1a;
-    border: 1px solid #3b3b5c;
+    background-color: #1c1c2e;
+    border: 1px solid #27273a;
     border-radius: 14px;
-    min-width: 48px;
-    min-height: 24px;
+    min-width: 52px;
+    min-height: 28px;
+    transition: all 200ms ease;
 }
 
 switch:checked {
-    background-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    border-color: #6366f1;
+    background-image: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    border-color: #7c3aed;
 }
 
 switch slider {
-    background-color: white;
-    border-radius: 12px;
-    min-width: 20px;
-    min-height: 20px;
+    background-color: #fafafa;
+    border-radius: 13px;
+    min-width: 24px;
+    min-height: 24px;
     margin: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 /* === Progress Bars === */

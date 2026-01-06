@@ -1,26 +1,26 @@
 # MuxOS
 
-**A lightweight, gaming-optimized Linux-based operating system**
+**A lightweight, gaming-optimized Linux distribution**
 
-MuxOS combines the best of Windows and Linux: a familiar interface, excellent gaming performance, and minimal RAM usage.
+MuxOS is a pure Linux distribution built for gamers and power users. Minimal footprint, maximum performance, stunning visuals.
 
 ## ✨ Features
 
-- 🎮 **Gaming Optimized**: Pre-configured for maximum gaming performance with GameMode, MangoHud
-- 💨 **Low RAM Usage**: Only ~300-400 MB at idle
-- 🖥️ **Modern Desktop**: Beautiful, intuitive interface inspired by Windows and Linux
-- 🔧 **Control Panel**: Complete system configuration with Work/Gaming modes
-- 📦 **Pre-installed Apps**: Essential applications included out of the box
-- 🔌 **Hardware Support**: Automatic driver detection for NVIDIA, AMD, Intel
-- ⚡ **Performance Focused**: Optimized kernel (1000Hz, PREEMPT) and system services
-- 🔒 **Security**: Firewall, intrusion detection, privacy tools included
-- 🔄 **GitHub Updates**: Automatic update notifications from repository
+- 🎮 **Gaming Optimized**: Pre-configured GameMode, MangoHud, Wine/Proton ready
+- 💨 **Ultra Lightweight**: Only ~300-400 MB RAM at idle
+- 🖥️ **Modern Desktop**: Sleek Openbox-based desktop with blur effects and animations
+- 🔧 **Control Center**: Unified system configuration with Work/Gaming profiles
+- 📦 **Ready to Use**: Essential applications pre-installed and configured
+- 🔌 **Hardware Support**: Auto-detection for NVIDIA, AMD, Intel GPUs
+- ⚡ **Performance Tuned**: Optimized kernel (1000Hz, PREEMPT), ZRAM, CPU governors
+- 🔒 **Secure by Default**: UFW firewall, Fail2ban, AppArmor enabled
+- 🔄 **Rolling Updates**: GitHub-based update system with notifications
 
 ## 🖥️ Included Applications
 
 ### System Tools
-- **Control Panel** - Complete Windows/Linux style settings
-- **Task Manager** - Process and system management
+- **Control Center** - Unified system settings and configuration
+- **Task Manager** - Process monitoring and system management
 - **Disk Manager** - Storage, cleanup, backup tools
 - **Security Center** - Firewall, antivirus, privacy
 - **Update Center** - GitHub-based update system

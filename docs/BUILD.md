@@ -19,9 +19,6 @@ sudo apt install -y \
     build-essential \
     wget \
     curl
-    polkit-1
-    policykit-1
-
 ```
 
 ## Build Process
@@ -65,5 +62,3 @@ Edit `config/muxos.conf` to customize:
 **Missing dependencies**: Run the prerequisites installation command again
 
 **ISO won't boot**: Verify BIOS/UEFI settings and secure boot configuration
-
-

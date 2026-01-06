@@ -1,44 +1,50 @@
 {
   "name": "MuxOS Velocity",
-  "version": "1.0",
+  "version": "2.0",
   
   "colors": {
-    "primary": "#6366f1",
-    "secondary": "#8b5cf6",
-    "accent": "#06b6d4",
-    "success": "#10b981",
-    "warning": "#f59e0b",
-    "error": "#ef4444",
+    "primary": "#7c3aed",
+    "secondary": "#a855f7",
+    "accent": "#22d3ee",
+    "success": "#34d399",
+    "warning": "#fbbf24",
+    "error": "#f87171",
     
-    "gradient_start": "#1e1b4b",
-    "gradient_mid": "#312e81",
+    "gradient_start": "#0c0a1d",
+    "gradient_mid": "#1e1b4b",
     "gradient_end": "#0f172a",
     
-    "bg_dark": "#0f0f1a",
-    "bg_medium": "#1a1a2e",
-    "bg_light": "#252542",
-    "bg_card": "#2d2d4a",
+    "bg_dark": "#09090f",
+    "bg_medium": "#12121c",
+    "bg_light": "#1c1c2e",
+    "bg_card": "#242438",
+    "bg_elevated": "#2a2a42",
     
-    "text_primary": "#f8fafc",
-    "text_secondary": "#cbd5e1",
-    "text_muted": "#64748b",
+    "text_primary": "#fafafa",
+    "text_secondary": "#a1a1aa",
+    "text_muted": "#52525b",
     
-    "border": "#3b3b5c",
-    "border_focus": "#6366f1",
+    "border": "#27273a",
+    "border_subtle": "#1f1f2e",
+    "border_focus": "#7c3aed",
+    "border_glow": "#a855f7",
     
-    "panel_bg": "rgba(15, 15, 26, 0.92)",
-    "menu_bg": "rgba(26, 26, 46, 0.95)",
-    "tooltip_bg": "rgba(45, 45, 74, 0.98)"
+    "panel_bg": "rgba(9, 9, 15, 0.88)",
+    "menu_bg": "rgba(18, 18, 28, 0.95)",
+    "tooltip_bg": "rgba(36, 36, 56, 0.98)",
+    "overlay_bg": "rgba(0, 0, 0, 0.6)"
   },
   
   "gradients": {
-    "main": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #0f172a 100%)",
-    "accent": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%)",
-    "success": "linear-gradient(135deg, #10b981 0%, #06b6d4 100%)",
-    "gaming": "linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f97316 100%)",
-    "panel": "linear-gradient(180deg, rgba(15,15,26,0.95) 0%, rgba(26,26,46,0.90) 100%)",
-    "button": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-    "button_hover": "linear-gradient(135deg, #818cf8 0%, #a78bfa 100%)"
+    "main": "linear-gradient(135deg, #0c0a1d 0%, #1e1b4b 40%, #0f172a 100%)",
+    "accent": "linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #22d3ee 100%)",
+    "success": "linear-gradient(135deg, #34d399 0%, #22d3ee 100%)",
+    "gaming": "linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #fb923c 100%)",
+    "panel": "linear-gradient(180deg, rgba(9,9,15,0.92) 0%, rgba(18,18,28,0.88) 100%)",
+    "button": "linear-gradient(135deg, #7c3aed 0%, #a855f7 100%)",
+    "button_hover": "linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%)",
+    "card": "linear-gradient(145deg, #1c1c2e 0%, #242438 100%)",
+    "glow": "radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%)"
   },
   
   "fonts": {
