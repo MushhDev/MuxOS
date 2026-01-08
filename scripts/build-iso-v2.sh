@@ -27,6 +27,38 @@ log_info "Cleaning previous build..."
 rm -rf "$BUILD_DIR"
 mkdir -p "$CHROOT_DIR" "$ISO_DIR"
 
+# Check if running in restricted environment (noexec/nodev)
+if mount | grep -q "$BUILD_DIR.*\(noexec\|nodev\)"; then
+    log_warn "Detected noexec/nodev mount restrictions"
+    log_info "Creating temporary directory with proper permissions..."
+    
+    # Create temp directory in /tmp (usually has exec permissions)
+    TEMP_BUILD="/tmp/muxos-build-$$"
+    mkdir -p "$TEMP_BUILD"
+    
+    # Update paths to use temp directory
+    CHROOT_DIR="$TEMP_BUILD/chroot"
+    ISO_DIR="$TEMP_BUILD/iso"
+    mkdir -p "$CHROOT_DIR" "$ISO_DIR"
+    
+    log_info "Using temporary build directory: $TEMP_BUILD"
+    
+    # Update cleanup function
+    cleanup() {
+        umount -lf "$CHROOT_DIR/dev/pts" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/dev" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/proc" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/sys" 2>/dev/null || true
+        # Copy final ISO to original location if build succeeds
+        if [ -f "$TEMP_BUILD/$ISO_NAME" ]; then
+            cp "$TEMP_BUILD/$ISO_NAME" "$BUILD_DIR/"
+            cp "$TEMP_BUILD/$ISO_NAME.sha256" "$BUILD_DIR/" 2>/dev/null || true
+        fi
+        rm -rf "$TEMP_BUILD"
+    }
+    trap cleanup EXIT
+fi
+
 log_info "Creating base system..."
 debootstrap --arch="$ARCH" "$BASE_RELEASE" "$CHROOT_DIR" http://deb.debian.org/debian/
 
@@ -35,13 +67,16 @@ mount --bind /dev/pts "$CHROOT_DIR/dev/pts"
 mount --bind /proc "$CHROOT_DIR/proc"
 mount --bind /sys "$CHROOT_DIR/sys"
 
-cleanup() {
-    umount -lf "$CHROOT_DIR/dev/pts" 2>/dev/null || true
-    umount -lf "$CHROOT_DIR/dev" 2>/dev/null || true
-    umount -lf "$CHROOT_DIR/proc" 2>/dev/null || true
-    umount -lf "$CHROOT_DIR/sys" 2>/dev/null || true
-}
-trap cleanup EXIT
+# Only set trap if not already set by restricted environment handler
+if ! mount | grep -q "$BUILD_DIR.*\(noexec\|nodev\)"; then
+    cleanup() {
+        umount -lf "$CHROOT_DIR/dev/pts" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/dev" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/proc" 2>/dev/null || true
+        umount -lf "$CHROOT_DIR/sys" 2>/dev/null || true
+    }
+    trap cleanup EXIT
+fi
 
 cat > "$CHROOT_DIR/etc/apt/sources.list" <<EOF
 deb http://deb.debian.org/debian/ $BASE_RELEASE main contrib non-free non-free-firmware
@@ -228,10 +263,17 @@ menuentry "MuxOS - Safe Mode" {
 EOF
 
 log_info "Building ISO..."
-grub-mkrescue -o "$BUILD_DIR/$ISO_NAME" "$ISO_DIR"
-
-cd "$BUILD_DIR"
-sha256sum "$ISO_NAME" > "$ISO_NAME.sha256"
+# Use TEMP_BUILD path if in restricted environment
+if [ -n "$TEMP_BUILD" ]; then
+    cd "$TEMP_BUILD"
+    grub-mkrescue -o "$TEMP_BUILD/$ISO_NAME" "$ISO_DIR"
+    sha256sum "$ISO_NAME" > "$ISO_NAME.sha256"
+    cd "$BUILD_DIR"
+else
+    cd "$BUILD_DIR"
+    grub-mkrescue -o "$BUILD_DIR/$ISO_NAME" "$ISO_DIR"
+    sha256sum "$ISO_NAME" > "$ISO_NAME.sha256"
+fi
 
 log_info "Build complete!"
 log_info "ISO: $BUILD_DIR/$ISO_NAME"
