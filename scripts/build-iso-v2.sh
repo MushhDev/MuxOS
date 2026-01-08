@@ -76,7 +76,25 @@ if mount | grep -q "$BUILD_DIR.*\(noexec\|nodev\)"; then
 fi
 
 log_info "Creating base system..."
-debootstrap --arch="$ARCH" "$BASE_RELEASE" "$CHROOT_DIR" http://deb.debian.org/debian/
+
+# Check architecture and use appropriate debootstrap syntax
+HOST_ARCH=$(dpkg --print-architecture)
+log_info "Host architecture: $HOST_ARCH"
+
+if [ "$HOST_ARCH" = "amd64" ]; then
+    # Try with --arch=amd64 first (newer debootstrap)
+    if debootstrap --help | grep -q "\-\-arch"; then
+        log_info "Using --arch=amd64 syntax"
+        debootstrap --arch=amd64 "$BASE_RELEASE" "$CHROOT_DIR" http://deb.debian.org/debian/
+    else
+        log_info "Using legacy syntax (no --arch option)"
+        debootstrap "$BASE_RELEASE" "$CHROOT_DIR" http://deb.debian.org/debian/
+    fi
+else
+    log_error "Unsupported architecture: $HOST_ARCH"
+    log_error "MuxOS currently only supports amd64"
+    exit 1
+fi
 
 mount --bind /dev "$CHROOT_DIR/dev"
 mount --bind /dev/pts "$CHROOT_DIR/dev/pts"
