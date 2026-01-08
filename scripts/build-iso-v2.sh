@@ -60,7 +60,7 @@ apt install -y \
     bluez blueman \
     xorg xserver-xorg-video-all openbox obconf picom tint2 \
     lightdm lightdm-gtk-greeter feh rofi dunst lxappearance \
-    polkit-1 policykit-1-gnome volumeicon-alsa network-manager-gnome \
+    polkit-1 polkitd-gnome volumeicon-alsa network-manager-gnome \
     locales fonts-noto fonts-noto-color-emoji fonts-noto-cjk \
     udisks2 gvfs gvfs-backends udiskie exfatprogs ntfs-3g
 CHROOT
@@ -182,8 +182,8 @@ cp "$PROJECT_ROOT/system/services/"*.service "$CHROOT_DIR/etc/systemd/system/"
 
 log_info "Configuring system..."
 chroot "$CHROOT_DIR" /bin/bash <<CHROOT
-systemctl enable lightdm NetworkManager
-useradd -m -s /bin/bash -G sudo,audio,video,plugdev,netdev $DEFAULT_USER
+systemctl enable lightdm NetworkManager polkit
+useradd -m -s /bin/bash -G sudo,audio,video,plugdev,netdev,polkitd $DEFAULT_USER
 echo "$DEFAULT_USER:muxos" | chpasswd
 echo "root:muxos" | chpasswd
 CHROOT
