@@ -18,8 +18,31 @@ sudo apt install -y \
     git \
     build-essential \
     wget \
-    curl
+    curl \
+    dos2unix
 ```
+
+## Troubleshooting
+
+### Line Ending Issues
+
+If you encounter errors like `$'\r': command not found`, the configuration files may have Windows line endings. Fix them with:
+
+```bash
+# Install dos2unix if not already installed
+sudo apt install dos2unix -y
+
+# Convert configuration files to Unix line endings
+dos2unix config/muxos.conf
+dos2unix scripts/*.sh
+
+# Verify the fix
+file config/muxos.conf
+```
+
+### Permission Issues
+
+If you encounter `noexec` or `nodev` mount errors, the script will automatically detect and use a temporary directory with proper permissions.
 
 ## Build Process
 
@@ -31,6 +54,8 @@ cd MuxOS
 
 2. **Run the build script**:
 ```bash
+chmod +x scripts/build-iso.sh
+
 sudo ./scripts/build-iso.sh
 ```
 

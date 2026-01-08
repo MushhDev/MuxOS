@@ -6,7 +6,6 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-source "$PROJECT_ROOT/config/muxos.conf"
 
 BUILD_DIR="$PROJECT_ROOT/build"
 CHROOT_DIR="$BUILD_DIR/chroot"
@@ -22,6 +21,23 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 
 [ "$EUID" -ne 0 ] && { log_error "Run as root"; exit 1; }
+
+# Check for Windows line endings in configuration files
+log_info "Checking configuration files..."
+if file "$PROJECT_ROOT/config/muxos.conf" | grep -q "CRLF"; then
+    log_error "Windows line endings detected in config/muxos.conf"
+    log_info "Fixing line endings..."
+    if command -v dos2unix >/dev/null 2>&1; then
+        dos2unix "$PROJECT_ROOT/config/muxos.conf"
+        log_info "Fixed with dos2unix"
+    else
+        log_error "Please install dos2unix and run: dos2unix config/muxos.conf"
+        exit 1
+    fi
+fi
+
+# Source configuration after fixing line endings
+source "$PROJECT_ROOT/config/muxos.conf"
 
 log_info "Cleaning previous build..."
 rm -rf "$BUILD_DIR"
