@@ -37,7 +37,7 @@ feh
 rofi
 dunst
 lxappearance
-polkit-1
+policykit-1
 policykit-1-gnome
 
 # Applications
