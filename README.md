@@ -51,7 +51,7 @@ MuxOS is a pure Linux distribution built for gamers and power users. Minimal foo
 
 ```bash
 # 1. Build ISO (on Linux)
-sudo ./scripts/build-iso-v2.sh
+sudo ./scripts/build-iso.sh
 
 # 2. Create bootable USB
 sudo dd if=build/muxos-1.0-amd64.iso of=/dev/sdX bs=4M status=progress
@@ -111,3 +111,4 @@ MuxOS/
 ## 📜 License
 
 MuxOS is built on open-source components under MIT/GPL licenses.
+
