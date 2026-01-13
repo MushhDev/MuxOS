@@ -32,11 +32,27 @@ log_error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+require_cmd() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        log_error "Missing required command: $1"
+        exit 1
+    fi
+}
+
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
     log_error "This script must be run as root"
     exit 1
 fi
+
+require_cmd debootstrap
+require_cmd mksquashfs
+require_cmd xorriso
+require_cmd grub-mkstandalone
+require_cmd dd
+require_cmd mformat
+require_cmd mmd
+require_cmd mcopy
 
 # Clean previous build
 log_info "Cleaning previous build..."
@@ -217,9 +233,9 @@ mkdir -p "$CHROOT_DIR/usr/share/muxos/optimizations"
 cp "$PROJECT_ROOT/system/optimizations/gaming-tweaks.sh" "$CHROOT_DIR/usr/share/muxos/optimizations/"
 chmod +x "$CHROOT_DIR/usr/share/muxos/optimizations/gaming-tweaks.sh"
 
- mkdir -p "$CHROOT_DIR/usr/share/muxos"
- cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/etc/muxos.conf" 2>/dev/null || true
- cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/usr/share/muxos/muxos.conf" 2>/dev/null || true
+mkdir -p "$CHROOT_DIR/usr/share/muxos"
+cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/etc/muxos.conf" 2>/dev/null || true
+cp "$PROJECT_ROOT/config/muxos.conf" "$CHROOT_DIR/usr/share/muxos/muxos.conf" 2>/dev/null || true
 
 # Driver scripts
 mkdir -p "$CHROOT_DIR/usr/share/muxos/drivers"
@@ -254,16 +270,16 @@ mkdir -p "$CHROOT_DIR/usr/lib/muxos"
 cp "$PROJECT_ROOT/system/setup/muxos-firstboot-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-firstboot-helper.py" 2>/dev/null || true
 chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-firstboot-helper.py" 2>/dev/null || true
 
- mkdir -p "$CHROOT_DIR/usr/share/polkit-1/actions"
- cp "$PROJECT_ROOT/system/polkit/com.muxos.firstboot.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.firstboot.policy" 2>/dev/null || true
- cp "$PROJECT_ROOT/system/polkit/com.muxos.security.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.security.policy" 2>/dev/null || true
- cp "$PROJECT_ROOT/system/polkit/com.muxos.updater.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.updater.policy" 2>/dev/null || true
+mkdir -p "$CHROOT_DIR/usr/share/polkit-1/actions"
+cp "$PROJECT_ROOT/system/polkit/com.muxos.firstboot.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.firstboot.policy" 2>/dev/null || true
+cp "$PROJECT_ROOT/system/polkit/com.muxos.security.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.security.policy" 2>/dev/null || true
+cp "$PROJECT_ROOT/system/polkit/com.muxos.updater.policy" "$CHROOT_DIR/usr/share/polkit-1/actions/com.muxos.updater.policy" 2>/dev/null || true
 
- cp "$PROJECT_ROOT/system/security/muxos-security-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py" 2>/dev/null || true
- chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py" 2>/dev/null || true
+cp "$PROJECT_ROOT/system/security/muxos-security-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py" 2>/dev/null || true
+chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-security-helper.py" 2>/dev/null || true
 
- cp "$PROJECT_ROOT/system/updater/muxos-update-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py" 2>/dev/null || true
- chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py" 2>/dev/null || true
+cp "$PROJECT_ROOT/system/updater/muxos-update-helper.py" "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py" 2>/dev/null || true
+chmod +x "$CHROOT_DIR/usr/lib/muxos/muxos-update-helper.py" 2>/dev/null || true
 
 # System service
 mkdir -p "$CHROOT_DIR/etc/systemd/system"
@@ -305,34 +321,85 @@ cp "$CHROOT_DIR/boot/initrd.img-"* "$ISO_DIR/live/initrd"
 # Create GRUB configuration
 log_info "Creating GRUB configuration..."
 mkdir -p "$ISO_DIR/boot/grub"
-cat > "$ISO_DIR/boot/grub/grub.cfg" <<EOF
-set timeout=5
-set default=0
-
-insmod all_video
-insmod gfxterm
-set gfxmode=auto
-set gfxpayload=keep
-terminal_output gfxterm
-
-menuentry "MuxOS - Live" {
-    linux /live/vmlinuz boot=live quiet splash
-    initrd /live/initrd
-}
-
-menuentry "MuxOS - Live (Safe Mode)" {
-    linux /live/vmlinuz boot=live nomodeset
-    initrd /live/initrd
-}
-EOF
+GRUB_TEMPLATE="$PROJECT_ROOT/boot/grub/grub-live.cfg"
+if [ ! -f "$GRUB_TEMPLATE" ]; then
+    log_error "Missing GRUB live template: $GRUB_TEMPLATE"
+    exit 1
+fi
+ISO_LABEL_ESC="$(printf '%s' "$ISO_LABEL" | sed 's/[&|]/\\&/g')"
+KERNEL_PARAMS_ESC="$(printf '%s' "$KERNEL_PARAMS" | sed 's/[&|]/\\&/g')"
+sed \
+    -e "s|@ISO_LABEL@|$ISO_LABEL_ESC|g" \
+    -e "s|@KERNEL_PARAMS@|$KERNEL_PARAMS_ESC|g" \
+    "$GRUB_TEMPLATE" > "$ISO_DIR/boot/grub/grub.cfg"
 
 # Create ISO
-log_info "Creating bootable ISO..."
-grub-mkrescue -o "$BUILD_DIR/$ISO_NAME" "$ISO_DIR" \
-    --compress=xz \
-    --fonts="" \
-    --locales="" \
-    --themes=""
+log_info "Creating boot images (BIOS + UEFI)..."
+
+GRUB_BIOS_CDBOOT=""
+for p in /usr/lib/grub/i386-pc/cdboot.img; do
+    if [ -f "$p" ]; then
+        GRUB_BIOS_CDBOOT="$p"
+        break
+    fi
+done
+if [ -z "$GRUB_BIOS_CDBOOT" ]; then
+    log_error "Could not find GRUB BIOS cdboot.img (install grub-pc-bin on the host)"
+    exit 1
+fi
+
+GRUB_HYBRID_MBR=""
+for p in /usr/lib/grub/i386-pc/boot_hybrid.img; do
+    if [ -f "$p" ]; then
+        GRUB_HYBRID_MBR="$p"
+        break
+    fi
+done
+
+mkdir -p "$ISO_DIR/boot/grub/i386-pc"
+grub-mkstandalone \
+    -O i386-pc \
+    -o "$WORK_DIR/core.img" \
+    --modules="biosdisk iso9660 normal linux search search_fs_file search_label configfile gfxterm all_video" \
+    "boot/grub/grub.cfg=$ISO_DIR/boot/grub/grub.cfg"
+cat "$GRUB_BIOS_CDBOOT" "$WORK_DIR/core.img" > "$ISO_DIR/boot/grub/i386-pc/eltorito.img"
+
+grub-mkstandalone \
+    -O x86_64-efi \
+    -o "$WORK_DIR/BOOTX64.EFI" \
+    --modules="part_gpt part_msdos fat iso9660 normal linux search search_fs_file search_label configfile gfxterm all_video" \
+    "boot/grub/grub.cfg=$ISO_DIR/boot/grub/grub.cfg"
+
+dd if=/dev/zero of="$WORK_DIR/efiboot.img" bs=1M count=20 status=none
+mformat -i "$WORK_DIR/efiboot.img" ::
+mmd -i "$WORK_DIR/efiboot.img" ::/EFI ::/EFI/BOOT
+mcopy -i "$WORK_DIR/efiboot.img" "$WORK_DIR/BOOTX64.EFI" ::/EFI/BOOT/BOOTX64.EFI
+
+mkdir -p "$ISO_DIR/EFI/BOOT"
+cp "$WORK_DIR/efiboot.img" "$ISO_DIR/EFI/BOOT/efiboot.img"
+
+log_info "Creating bootable ISO (El Torito BIOS + UEFI)..."
+X_ISO_ARGS=(
+    -as mkisofs
+    -r
+    -V "$ISO_LABEL"
+    -o "$BUILD_DIR/$ISO_NAME"
+    -J
+    -joliet-long
+    -iso-level 3
+    -b boot/grub/i386-pc/eltorito.img
+    -c boot/grub/boot.cat
+    -no-emul-boot
+    -boot-load-size 4
+    -boot-info-table
+    -eltorito-alt-boot
+    -e EFI/BOOT/efiboot.img
+    -no-emul-boot
+)
+if [ -n "$GRUB_HYBRID_MBR" ]; then
+    X_ISO_ARGS+=(--grub2-mbr "$GRUB_HYBRID_MBR" -isohybrid-gpt-basdat)
+fi
+xorriso "${X_ISO_ARGS[@]}" "$ISO_DIR"
 
 # Calculate checksum
 log_info "Calculating checksum..."
